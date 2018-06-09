@@ -1,0 +1,64 @@
+server:
+  port: 9000
+zuul:
+  routes:
+    base:
+      path: /scsj-base/**
+      serviceId: scsj-base
+    user:
+      path: /scsj-user/**
+      serviceId: scsj-user
+    wechat:
+      path: /scsj-wechat/**
+      serviceId: scsj-wechat
+    baseinfo:
+      path: /scsj-baseinfo/**
+      serviceId: scsj-baseinfo
+    order:
+      path: /scsj-order/**
+      serviceId: scsj-order
+    treasure:
+      path: /scsj-treasure/**
+      serviceId: scsj-treasure
+    allinpay:
+      path: /scsj-allinpay/**
+      serviceId: scsj-allinpay
+spring:
+    #dev/sit/uat/stable
+    profiles:
+        active: dev
+    application:
+        name: spring-zuul-gateway
+eureka:
+  instance:
+    prefer-ip-address: true
+logging:
+    config: classpath:config/logback.xml
+---
+spring:
+    profiles: dev
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://192.168.1.115:8761/eureka, http://192.168.1.115:8762/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 15
+---
+spring:
+    profiles: sit
+eureka:
+  client:
+    serviceUrl:
+      #http://testapi.lanboinfo.cn/serverCenter/eureka
+      defaultZone: http://39.105.15.37:8761/eureka, http://39.105.15.37:8762/eureka
+  instance:
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 15
+---
+spring:
+    profiles: stable
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://39.105.15.37:8761/eureka, http://39.105.15.37:8762/eureka

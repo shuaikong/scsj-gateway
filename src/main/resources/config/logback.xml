@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" debug="true" scanPeriod="60 seconds">
+    <contextName>logback</contextName>
+    <include resource="org/springframework/boot/logging/logback/base.xml" />
+
+    <springProfile name="dev">
+        <logger name="com.alibaba.druid" level="DEBUG" />
+        <logger name="org.springframework" level="INFO"/>
+        <logger name="org.springboot.sample" level="TRACE" />
+        <logger name="com.scsj" level="DEBUG" />
+        <logger name="com.netflix" level="DEBUG" />
+    </springProfile>
+
+    <springProfile name="sit,uat">
+        <appender name="springboot"
+                  class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <append>true</append>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <!--<FileNamePattern>../logs/springboot_%d{yyyy-MM-dd}.%i.log</FileNamePattern>-->
+                <FileNamePattern>C://logs/springboot_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+                <MaxFileSize>1GB</MaxFileSize>
+                <MaxHistory>10</MaxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%d{yyyy-M-d HH:mm:ss} %t %p %m%n</pattern>
+            </encoder>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} %X{sourceThread} - %msg%n</pattern>
+            </layout>
+        </appender>
+
+        <logger name="com.alibaba.druid" level="DEBUG" >
+            <appender-ref ref="springboot"/>
+        </logger>
+        <logger name="org.springframework" level="DEBUG" additivity="false">
+            <appender-ref ref="springboot"/>
+        </logger>
+        <logger name="org.springboot.sample" level="DEBUG" additivity="false">
+            <appender-ref ref="springboot"/>
+        </logger>
+        <logger name="com.netflix" level="DEBUG" additivity="false">
+            <appender-ref ref="springboot"/>
+        </logger>
+        <!-- name包必须能够扫描到所有类，包括启动类 -->
+        <logger name="com.scsj" level="DEBUG" additivity="false">
+            <appender-ref ref="springboot"/>
+        </logger>
+        <root level="DEBUG">
+            <appender-ref ref="springboot"/>
+        </root>
+    </springProfile>
+
+    <springProfile name="stable">
+        <appender name="springboot"
+                  class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <append>true</append>
+            <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <!--<FileNamePattern>../logs/springboot_%d{yyyy-MM-dd}.%i.log</FileNamePattern>-->
+                <FileNamePattern>C://logs/springboot_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+                <MaxFileSize>1GB</MaxFileSize>
+                <MaxHistory>10</MaxHistory>
+            </rollingPolicy>
+            <encoder>
+                <pattern>%d{yyyy-M-d HH:mm:ss} %t %p %m%n</pattern>
+            </encoder>
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} %X{sourceThread} - %msg%n</pattern>
+            </layout>
+        </appender>
+
+        <logger name="com.alibaba.druid" level="info" >
+            <appender-ref ref="springboot"/>
+        </logger>
+        <logger name="org.springframework" level="info" additivity="false">
+            <appender-ref ref="springboot"/>
+        </logger>
+        <logger name="org.springboot.sample" level="info" additivity="false">
+            <appender-ref ref="springboot"/>
+        </logger>
+        <logger name="com.netflix" level="INFO" additivity="false">
+            <appender-ref ref="springboot"/>
+        </logger>
+        <!-- name包必须能够扫描到所有类，包括启动类 -->
+        <logger name="com.scsj" level="info" additivity="false">
+            <appender-ref ref="springboot"/>
+        </logger>
+        <root level="info">
+            <appender-ref ref="springboot"/>
+        </root>
+    </springProfile>
+
+</configuration>
