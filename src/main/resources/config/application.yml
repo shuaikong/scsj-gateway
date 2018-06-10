@@ -23,6 +23,9 @@ zuul:
     allinpay:
       path: /scsj-allinpay/**
       serviceId: scsj-allinpay
+  sensitive-headers:
+  ignore-security-headers: false
+  add-host-header: true
 spring:
     #dev/sit/uat/stable
     profiles:
