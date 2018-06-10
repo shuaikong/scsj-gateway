@@ -56,8 +56,7 @@
                   class="ch.qos.logback.core.rolling.RollingFileAppender">
             <append>true</append>
             <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-                <!--<FileNamePattern>../logs/springboot_%d{yyyy-MM-dd}.%i.log</FileNamePattern>-->
-                <FileNamePattern>C://logs/springboot_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
+                <FileNamePattern>../logs/springboot_%d{yyyy-MM-dd}.%i.log</FileNamePattern>
                 <MaxFileSize>1GB</MaxFileSize>
                 <MaxHistory>10</MaxHistory>
             </rollingPolicy>
