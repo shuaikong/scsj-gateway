@@ -28,7 +28,7 @@ spring:
     profiles:
         active: dev
     application:
-        name: spring-zuul-gateway
+        name: scsj-gateway
 eureka:
   instance:
     prefer-ip-address: true
