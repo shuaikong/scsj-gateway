@@ -9,7 +9,7 @@
         <logger name="org.springframework" level="INFO"/>
         <logger name="org.springboot.sample" level="TRACE" />
         <logger name="com.scsj" level="DEBUG" />
-        <logger name="com.netflix" level="INFO" />
+        <logger name="com.netflix" level="DEBUG" />
     </springProfile>
 
     <springProfile name="sit,uat">
