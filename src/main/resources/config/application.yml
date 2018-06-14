@@ -17,6 +17,7 @@ zuul:
     order:
       path: /scsj-order/**
       serviceId: scsj-order
+#      stripPrefix: false
     treasure:
       path: /scsj-treasure/**
       serviceId: scsj-treasure
@@ -26,6 +27,19 @@ zuul:
   sensitive-headers:
   ignore-security-headers: false
   add-host-header: true
+  #连接配置
+  host:
+    #超时时长
+    socket-timeout-millis: 60000
+    connect-timeout-millis: 60000
+    #每个服务的http客户端连接池最大连接
+    max-total-connections: 100000
+    #每个route可用的最大连接数
+    max-per-route-connections: 10000
+  semaphore:
+    #Hystrix最大并发请求 50万
+    max-semaphores: 500000
+  ribbon-isolation-strategy: semaphore
 spring:
     #dev/sit/uat/stable
     profiles:
@@ -37,13 +51,20 @@ eureka:
     prefer-ip-address: true
 logging:
     config: classpath:config/logback.xml
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
 ---
 spring:
     profiles: dev
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://192.168.1.115:8761/eureka, http://192.168.1.115:8762/eureka
+      defaultZone: http://192.168.1.115:8761/eureka,http://192.168.1.115:8762/eureka
   instance:
     lease-renewal-interval-in-seconds: 10
     lease-expiration-duration-in-seconds: 15

@@ -9,7 +9,7 @@
         <logger name="org.springframework" level="INFO"/>
         <logger name="org.springboot.sample" level="TRACE" />
         <logger name="com.scsj" level="DEBUG" />
-        <logger name="com.netflix" level="DEBUG" />
+        <logger name="com.netflix" level="INFO" />
     </springProfile>
 
     <springProfile name="sit,uat">
@@ -39,7 +39,7 @@
         <logger name="org.springboot.sample" level="DEBUG" additivity="false">
             <appender-ref ref="springboot"/>
         </logger>
-        <logger name="com.netflix" level="DEBUG" additivity="false">
+        <logger name="com.netflix" level="INFO" additivity="false">
             <appender-ref ref="springboot"/>
         </logger>
         <!-- name包必须能够扫描到所有类，包括启动类 -->
